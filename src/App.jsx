@@ -5,7 +5,7 @@ import { MDXProvider } from './mdx-plugin/context'
 export default defineComponent({
   setup() {
     return () => <MDXProvider components={{
-      p: (props, { slots }) => <h1 {...props}>{slots.default && slots.default()}</h1>
+      h1: (props, { slots }) => <li {...props}>{slots.default && slots.default()}</li>
     }}>
       <Test />
     </MDXProvider>
