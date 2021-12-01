@@ -5,6 +5,7 @@ import {
   computed,
   provide,
   inject,
+  Ref
 } from 'vue'
 
 export type CompnentsType = Record<string, VNodeTypes>
@@ -28,7 +29,7 @@ export const MDXProvider = defineComponent({
 })
 
 const defaultComponentsRef = computed(() => ({}))
-export const useMDXComponents = (getComponents: () => CompnentsType) => {
+export const useMDXComponents = (getComponents: () => CompnentsType): Ref<CompnentsType> => {
   const contextComponents = inject(contextKey, defaultComponentsRef)
   const mergeComponentsRef = computed(() => ({
     ...contextComponents.value,

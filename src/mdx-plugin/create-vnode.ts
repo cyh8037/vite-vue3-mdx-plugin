@@ -12,7 +12,7 @@ import {
 import { CompnentsType, useMDXComponents } from './context'
 
 const TYPE_PROP_NAME = 'mdxType'
-const DEFAULTS = {
+const DEFAULTS: any = {
   inlineCode: 'code',
   wrapper: defineComponent({
     name: 'defaultComponent',
@@ -29,10 +29,13 @@ const CreateMDXComponent = defineComponent({
   props: {
     components: {
       type: Object as PropType<CompnentsType>,
-      default: () => {},
+      default: () => { },
     },
     originalType: String as PropType<VNodeTypes>,
-    mdxType: String,
+    mdxType: {
+      type: String,
+      required: true
+    },
     parentName: String,
   },
   setup(props, { slots }) {
@@ -42,7 +45,6 @@ const CreateMDXComponent = defineComponent({
       const { originalType, mdxType, parentName, ...etc } = props
       const components = componentsRef.value
       console.log(mdxType, components)
-      // 呃。。。这部分类型不知道咋定义/(ㄒoㄒ)/~~
       const Component =
         components[`${parentName}.${mdxType}`] ||
         components[mdxType] ||
